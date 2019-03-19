@@ -1,8 +1,18 @@
-﻿@model NASA
+﻿@model dataUtiliateur
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
-<img src="@Model.contextWrites.to.url"/>
+<img src="@Model.Nasa.contextWrites.to.url" />
+<p>un peu de blabla</p>
+
+@using (Html.BeginForm("Sugestion","Home"))
+{
+    @Html.ValidationSummary(true)
+    <span>what do you want ?</span>
+    @Html.LabelFor(m=>m.Type)
+    @Html.DropDownListFor(m => m.Type,Model.ListeType)
+    <button type="submit">Donne moi un Film</button>
+}

@@ -38,12 +38,15 @@ namespace Générateur_de_film.Controllers
                     //Deserializing the response recieved from web api and storing into the Employee list  
                     nasa = JsonConvert.DeserializeObject<NASA>(photooftheday);
                 }
-                return View(nasa);
+                dataUtiliateur data = new dataUtiliateur();
+                data.Nasa = nasa;
+                return View(data);
             }
         }
 
+        [HttpPost]
         [Authorize]
-        public async Task<ActionResult> Sugestion(string id)
+        public async Task<ActionResult> Sugestion(dataUtiliateur data)
         {
             //Hosted web API REST Service base url  
             Film FilmInfo = new Film();
@@ -51,7 +54,7 @@ namespace Générateur_de_film.Controllers
             using (var client = new HttpClient())
             {
                 //Passing service base url  
-                string uri = Baseurl + "?apikey=df5969bf&i="+id;
+                string uri = Baseurl + "?apikey=df5969bf&i="+data.IdFilm;
                 client.BaseAddress = new Uri(Baseurl);
 
                 client.DefaultRequestHeaders.Clear();

@@ -4,15 +4,22 @@
 }
 
 <h2>Index</h2>
+@if (Model.Nasa.contextWrites.to.media_type == "video")
+{
+    <iframe width="560" height="315" src="@Model.Nasa.contextWrites.to.url"></iframe>
+}
+else
+{
+    <img src="@Model.Nasa.contextWrites.to.url" />
+}
 
-<img src="@Model.Nasa.contextWrites.to.url" />
 <p>un peu de blabla</p>
 
-@using (Html.BeginForm("Sugestion","Home"))
+@using (Html.BeginForm("Sugestion", "Home"))
 {
     @Html.ValidationSummary(true)
     <span>what do you want ?</span>
-    @Html.LabelFor(m=>m.Type)
-    @Html.DropDownListFor(m => m.Type,Model.ListeType)
+    @Html.LabelFor(m => m.Type)
+    @Html.DropDownListFor(m => m.Type, Model.ListeType)
     <button type="submit">Donne moi un Film</button>
 }

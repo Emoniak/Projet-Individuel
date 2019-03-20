@@ -47,6 +47,7 @@ namespace Générateur_de_film.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> Sugestion(dataUtiliateur data)
         {
             await data.GetFilmAsync();

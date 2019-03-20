@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -12,7 +13,8 @@ namespace Générateur_de_film.Controllers
 {
     public class HomeController : Controller
     {
-        string Baseurl = "http://www.omdbapi.com/";
+        public static string Baseurl = "http://www.omdbapi.com/";
+        public static string API_KEY = ConfigurationManager.AppSettings.Get("apikey");
 
         public async Task<ActionResult> Index()
         {
@@ -45,16 +47,17 @@ namespace Générateur_de_film.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<ActionResult> Sugestion(dataUtiliateur data)
         {
+            await data.GetFilmAsync();
+
             //Hosted web API REST Service base url  
             Film FilmInfo = new Film();
 
             using (var client = new HttpClient())
             {
                 //Passing service base url  
-                string uri = Baseurl + "?apikey=df5969bf&i="+data.IdFilm;
+                string uri = Baseurl + "?apikey="+API_KEY+"&i="+data.GetRandomFilm();
                 client.BaseAddress = new Uri(Baseurl);
 
                 client.DefaultRequestHeaders.Clear();
@@ -72,8 +75,8 @@ namespace Générateur_de_film.Controllers
                     //Deserializing the response recieved from web api and storing into the Employee list  
                     FilmInfo = JsonConvert.DeserializeObject<Film>(FilmResponce);
                 }
-                //returning the employee list to view  
-                return View(FilmInfo);
+                SugestionFilm sugestion = new SugestionFilm(data.FilmExistants, FilmInfo);
+                return View(sugestion);
 
             }
         }

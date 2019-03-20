@@ -111,7 +111,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
-    <Content Include="Views\Home\View.cshtml" />
+    <Content Include="Views\Home\Sugestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -123,6 +123,7 @@
     <Compile Include="Models\Film.cs" />
     <Compile Include="Models\FilmExistant.cs" />
     <Compile Include="Models\NASA.cs" />
+    <Compile Include="Models\SugestionFilm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

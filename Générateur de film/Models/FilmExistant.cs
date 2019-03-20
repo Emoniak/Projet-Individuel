@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Générateur_de_film.Models
+namespace Générateur_de_film
 {
     public class FilmExistant
     {
